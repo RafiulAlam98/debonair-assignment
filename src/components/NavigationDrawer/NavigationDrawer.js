@@ -2,6 +2,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import CssBaseline from "@mui/material/CssBaseline";
+import Divider from "@mui/material/Divider";
 import Drawer from "@mui/material/Drawer";
 import IconButton from "@mui/material/IconButton";
 import List from "@mui/material/List";
@@ -14,7 +15,7 @@ import PropTypes from "prop-types";
 import * as React from "react";
 import { Link } from "react-router-dom";
 
-const drawerWidth = 180;
+const drawerWidth = 150;
 
 function NavigationDrawer(props) {
   const { window } = props;
@@ -27,9 +28,9 @@ function NavigationDrawer(props) {
   const drawer = (
     <div>
       <Toolbar />
-
+      <Divider />
       <List>
-        {["users", "employees"].map((link) => (
+        {["users", "employees"].map((link, index) => (
           <ListItem key={link} disablePadding>
             <Link style={{ textDecoration: "none" }} to={link}>
               <ListItemButton>
@@ -66,7 +67,7 @@ function NavigationDrawer(props) {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap component="div">
-            Management System
+            Responsive drawer
           </Typography>
         </Toolbar>
       </AppBar>
