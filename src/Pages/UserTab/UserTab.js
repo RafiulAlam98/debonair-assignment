@@ -1,18 +1,17 @@
-import { Button } from "@mui/material";
+import { Button } from "@material-ui/core";
 import React from "react";
-import AddUserModal from "../../../components/AddUserModal/AddUserModal";
+import AddUserModal from "../../components/AddUserModal/AddUserModal";
 
-const Users = () => {
+const UserTab = () => {
   const [openModal, setOpenModal] = React.useState(false);
   const handleOpenModal = () => setOpenModal(true);
   const handleCloseModal = () => setOpenModal(false);
-
   return (
-    <div>
-      <Button onClick={handleOpenModal}>Add User</Button>
+    <React.Fragment>
+      <Button onClick={handleOpenModal}>Open modal</Button>
       <AddUserModal openModal={openModal} handleCloseModal={handleCloseModal} />
-    </div>
+    </React.Fragment>
   );
 };
 
-export default Users;
+export default UserTab;
