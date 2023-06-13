@@ -27,8 +27,9 @@ const EmployeesTab = () => {
           </TableHead>
           <TableBody>
             {employees.readEmployeeData.map((employee) => (
+              employee.employeeType === "Employee"  &&
               <TableRow
-                key={employee.firstName}
+                key={employee.empID}
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
               >
                 <TableCell align="center">{employee.firstName}</TableCell>
