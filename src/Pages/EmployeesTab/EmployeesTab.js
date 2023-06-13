@@ -7,7 +7,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import React from "react";
 import useEmployee from "../../hooks/useEmployee";
-import { Button } from "@material-ui/core";
+import { Box, Button, TextField } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import UpdateUserModal from "../../components/UpdateUserModal/UpdateUserModal";
 
@@ -15,7 +15,16 @@ const EmployeesTab = () => {
   const [openModal, setOpenModal] = React.useState(false);
   const handleOpenUpdateModal = () => setOpenModal(true);
   const handleCloseUpdateModal = () => setOpenModal(false);
-  const { employees } = useEmployee();
+  const { employees, displayEmployees, setDisplayEmployees } = useEmployee();
+  const handleSearch = (e) => {
+    const searchProduct = e.target.value;
+
+    const matchProduct = employees?.filter((emp) =>
+      emp.firstName.toLowerCase().includes(searchProduct.toLowerCase())
+    );
+    console.log(matchProduct);
+    setDisplayEmployees(matchProduct);
+  };
 
   return (
     <React.Fragment>
@@ -23,6 +32,17 @@ const EmployeesTab = () => {
         openUpdateModal={openModal}
         handleCloseUpdateModal={handleCloseUpdateModal}
       />
+
+      <Box sx={{ marginTop: 4 }}>
+        <TextField
+          onChange={handleSearch}
+          sx={{ width: "100%" }}
+          id="outlined-basic"
+          label="Search User"
+          variant="outlined"
+          size="small"
+        />
+      </Box>
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
@@ -37,7 +57,7 @@ const EmployeesTab = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {employees?.readEmployeeData.map(
+            {displayEmployees?.map(
               (employee) =>
                 employee.employeeType === "Employee" && (
                   <TableRow

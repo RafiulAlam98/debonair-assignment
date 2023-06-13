@@ -1,28 +1,20 @@
-import React from "react";
-import { useQuery } from "react-query";
-import Loading from "../components/Loading/Loading";
+import { useEffect, useState } from "react";
 
 const useEmployee = () => {
-  const {
-    data: employees = [],
-    refetch,
-    isLoading,
-  } = useQuery({
-    queryKey: ["employees"],
-    queryFn: async () => {
-      const result = await fetch(
-        `http://59.152.62.177:8085/api/Employee/EmployeeData`
-      );
-      const data = await result.json();
-      return data;
-    },
-  });
+  const [employees, setEmployees] = useState([]);
+  const [displayEmployees, setDisplayEmployees] = useState([]);
 
-  if (isLoading) {
-    return <Loading />;
-  }
+  useEffect(() => {
+    fetch("http://59.152.62.177:8085/api/Employee/EmployeeData")
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data.readEmployeeData);
+        setEmployees(data.readEmployeeData);
+        setDisplayEmployees(data.readEmployeeData);
+      });
+  }, []);
   // console.log(employees?.readEmployeeData);
-  return { employees, refetch, isLoading };
+  return { employees, displayEmployees, setDisplayEmployees };
 };
 
 export default useEmployee;

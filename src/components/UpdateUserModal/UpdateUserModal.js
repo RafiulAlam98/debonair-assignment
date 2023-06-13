@@ -71,6 +71,7 @@ const UpdateUserModal = ({ openUpdateModal, handleCloseUpdateModal }) => {
             variant="standard"
             name="firstName"
             type="text"
+            size="small"
             onChange={formik.handleChange}
             value={formik.values.firstName}
           />
@@ -81,6 +82,7 @@ const UpdateUserModal = ({ openUpdateModal, handleCloseUpdateModal }) => {
             variant="standard"
             name="lastName"
             type="text"
+            size="small"
             onChange={formik.handleChange}
             value={formik.values.lastName}
           />
@@ -92,6 +94,7 @@ const UpdateUserModal = ({ openUpdateModal, handleCloseUpdateModal }) => {
             variant="standard"
             name="employeeType"
             type="text"
+            size="small"
             onChange={formik.handleChange}
             value={formik.values.employeeType}
           />
@@ -103,6 +106,7 @@ const UpdateUserModal = ({ openUpdateModal, handleCloseUpdateModal }) => {
             label="Select"
             variant="standard"
             defaultValue=""
+            size="small"
             onChange={(e) => {
               setSelectDivison(e.target.value);
             }}
@@ -122,6 +126,7 @@ const UpdateUserModal = ({ openUpdateModal, handleCloseUpdateModal }) => {
             label="Select"
             variant="standard"
             defaultValue=""
+            size="small"
             onChange={(e) => {
               setSelectDistrict(e.target.value);
             }}
@@ -141,6 +146,7 @@ const UpdateUserModal = ({ openUpdateModal, handleCloseUpdateModal }) => {
             label="District ID"
             variant="standard"
             name="districeID"
+            size="small"
             onChange={formik.handleChange}
             value={selectDistrict}
           />

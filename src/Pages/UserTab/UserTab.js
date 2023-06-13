@@ -1,4 +1,5 @@
 import {
+  Box,
   Button,
   Paper,
   Table,
@@ -7,11 +8,11 @@ import {
   TableContainer,
   TableHead,
   TableRow,
+  TextField,
 } from "@material-ui/core";
 import React from "react";
 import AddUserModal from "../../components/AddUserModal/AddUserModal";
 import useEmployee from "../../hooks/useEmployee";
-import Loading from "../../components/Loading/Loading";
 import { Link } from "react-router-dom";
 import UpdateUserModal from "../../components/UpdateUserModal/UpdateUserModal";
 
@@ -21,19 +22,37 @@ const UserTab = () => {
   const handleCloseModal = () => setOpenModal(false);
   const handleOpenUpdateModal = () => setOpenModal(true);
   const handleCloseUpdateModal = () => setOpenModal(false);
-  const { employees, isLoading } = useEmployee();
-  if (isLoading) {
-    return <Loading />;
-  }
+  const { employees, displayEmployees, setDisplayEmployees } = useEmployee();
 
+  const handleSearch = (e) => {
+    const searchProduct = e.target.value;
+
+    const matchProduct = employees?.filter((emp) =>
+      emp.firstName.toLowerCase().includes(searchProduct.toLowerCase())
+    );
+    console.log(matchProduct);
+    setDisplayEmployees(matchProduct);
+  };
   return (
     <React.Fragment>
-      <Button onClick={handleOpenModal}>Add New User</Button>
+      <Button onClick={handleOpenModal} style={{ marginBottom: 10 }}>
+        Add New User
+      </Button>
       <AddUserModal openModal={openModal} handleCloseModal={handleCloseModal} />
       <UpdateUserModal
         openUpdateModal={openModal}
         handleCloseUpdateModal={handleCloseUpdateModal}
       />
+      <Box sx={{ marginTop: 10 }}>
+        <TextField
+          onChange={handleSearch}
+          sx={{ width: "100%", marginTop: 10 }}
+          id="outlined-basic"
+          label="Search User"
+          variant="outlined"
+          size="small"
+        />
+      </Box>
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
@@ -48,7 +67,7 @@ const UserTab = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {employees?.readEmployeeData.map(
+            {displayEmployees?.map(
               (employee) =>
                 employee.employeeType === "Admin" && (
                   <TableRow

@@ -72,6 +72,7 @@ const AddUserModal = ({ openModal, handleCloseModal }) => {
             type="text"
             onChange={formik.handleChange}
             value={formik.values.firstName}
+            size="small"
           />
           <TextField
             required
@@ -82,6 +83,7 @@ const AddUserModal = ({ openModal, handleCloseModal }) => {
             type="text"
             onChange={formik.handleChange}
             value={formik.values.lastName}
+            size="small"
           />
           <TextField
             required
@@ -93,6 +95,7 @@ const AddUserModal = ({ openModal, handleCloseModal }) => {
             type="text"
             onChange={formik.handleChange}
             value={formik.values.employeeType}
+            size="small"
           />
           <TextField
             required
@@ -102,6 +105,7 @@ const AddUserModal = ({ openModal, handleCloseModal }) => {
             label="Select"
             variant="standard"
             defaultValue=""
+            size="small"
             onChange={(e) => {
               setSelectDivison(e.target.value);
             }}
@@ -121,6 +125,7 @@ const AddUserModal = ({ openModal, handleCloseModal }) => {
             label="Select"
             variant="standard"
             defaultValue=""
+            size="small"
             onChange={(e) => {
               setSelectDistrict(e.target.value);
             }}
@@ -140,11 +145,12 @@ const AddUserModal = ({ openModal, handleCloseModal }) => {
             label="District ID"
             variant="standard"
             name="districeID"
+            size="small"
             onChange={formik.handleChange}
             value={selectDistrict}
           />
 
-          <Button sx={{ marginTop: 4 }} type="submit" variant="contained">
+          <Button size="small" type="submit" variant="contained">
             Submit
           </Button>
         </form>
