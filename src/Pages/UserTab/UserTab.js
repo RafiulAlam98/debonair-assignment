@@ -13,11 +13,14 @@ import AddUserModal from "../../components/AddUserModal/AddUserModal";
 import useEmployee from "../../hooks/useEmployee";
 import Loading from "../../components/Loading/Loading";
 import { Link } from "react-router-dom";
+import UpdateUserModal from "../../components/UpdateUserModal/UpdateUserModal";
 
 const UserTab = () => {
   const [openModal, setOpenModal] = React.useState(false);
   const handleOpenModal = () => setOpenModal(true);
   const handleCloseModal = () => setOpenModal(false);
+  const handleOpenUpdateModal = () => setOpenModal(true);
+  const handleCloseUpdateModal = () => setOpenModal(false);
   const { employees, isLoading } = useEmployee();
   if (isLoading) {
     return <Loading />;
@@ -25,8 +28,12 @@ const UserTab = () => {
 
   return (
     <React.Fragment>
-      <Button onClick={handleOpenModal}>Open modal</Button>
+      <Button onClick={handleOpenModal}>Add New User</Button>
       <AddUserModal openModal={openModal} handleCloseModal={handleCloseModal} />
+      <UpdateUserModal
+        openUpdateModal={openModal}
+        handleCloseUpdateModal={handleCloseUpdateModal}
+      />
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
@@ -66,7 +73,10 @@ const UserTab = () => {
                       </Button>
                     </TableCell>
                     <TableCell align="center">
-                      <Button onClick={handleOpenModal} variant="contained">
+                      <Button
+                        onClick={handleOpenUpdateModal}
+                        variant="contained"
+                      >
                         Update
                       </Button>
                     </TableCell>

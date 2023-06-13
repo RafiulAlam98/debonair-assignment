@@ -9,17 +9,20 @@ import React from "react";
 import useEmployee from "../../hooks/useEmployee";
 import { Button } from "@material-ui/core";
 import { Link } from "react-router-dom";
-import AddUserModal from "../../components/AddUserModal/AddUserModal";
+import UpdateUserModal from "../../components/UpdateUserModal/UpdateUserModal";
 
 const EmployeesTab = () => {
   const [openModal, setOpenModal] = React.useState(false);
-  const handleOpenModal = () => setOpenModal(true);
-  const handleCloseModal = () => setOpenModal(false);
+  const handleOpenUpdateModal = () => setOpenModal(true);
+  const handleCloseUpdateModal = () => setOpenModal(false);
   const { employees } = useEmployee();
 
   return (
     <React.Fragment>
-      <AddUserModal openModal={openModal} handleCloseModal={handleCloseModal} />
+      <UpdateUserModal
+        openUpdateModal={openModal}
+        handleCloseUpdateModal={handleCloseUpdateModal}
+      />
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
@@ -59,7 +62,10 @@ const EmployeesTab = () => {
                       </Button>
                     </TableCell>
                     <TableCell align="center">
-                      <Button onClick={handleOpenModal} variant="contained">
+                      <Button
+                        onClick={handleOpenUpdateModal}
+                        variant="contained"
+                      >
                         Update
                       </Button>
                     </TableCell>
