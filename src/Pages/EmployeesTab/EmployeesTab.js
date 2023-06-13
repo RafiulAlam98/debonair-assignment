@@ -6,29 +6,12 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import React from "react";
-import { useQuery } from "react-query";
-import Loading from "../../components/Loading/Loading";
+import useEmployee from "../../hooks/useEmployee";
 
 const EmployeesTab = () => {
-  const {
-    data: employees = [],
-    refetch,
-    isLoading,
-  } = useQuery({
-    queryKey: ["employees"],
-    queryFn: async () => {
-      const result = await fetch(
-        `http://59.152.62.177:8085/api/Employee/EmployeeData`
-      );
-      const data = await result.json();
-      return data;
-    },
-  });
-
-  if (isLoading) {
-    return <Loading />;
-  }
-  console.log(employees.readEmployeeData);
+  const { employees } = useEmployee()
+  console.log(employees)
+ 
   return (
     <React.Fragment>
       <TableContainer component={Paper}>
