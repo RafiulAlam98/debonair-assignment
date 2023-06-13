@@ -1,7 +1,7 @@
 import { Box, Button, MenuItem, Modal, TextField } from "@mui/material";
 import { useFormik } from "formik";
 import React, { useState } from "react";
-import * as Yup from 'yup';
+import * as Yup from "yup";
 import useDivisions from "../../hooks/useDivisions";
 import useDistricts from "../../hooks/useDistricts";
 const style = {
@@ -17,26 +17,24 @@ const style = {
 };
 
 const AddUserModal = ({ openModal, handleCloseModal }) => {
-  const [divisions] = useDivisions()
-  const [selectDivision, setSelectDivison] = useState("")
-  const [selectDistrict, setSelectDistrict] = useState("")
-  const divId = selectDivision
-  const [districts] = useDistricts(divId)
+  const [divisions] = useDivisions();
+  const [selectDivision, setSelectDivison] = useState("");
+  const [selectDistrict, setSelectDistrict] = useState("");
+  const divId = selectDivision;
+  const [districts] = useDistricts(divId);
 
-  console.log("districeID",selectDistrict)
+  // console.log("districeID",selectDistrict)
 
   const formik = useFormik({
-    
     initialValues: {
       firstName: "",
       lastName: "",
       employeeType: "",
       districeID: selectDistrict,
     },
-  
-    onSubmit: (values) => {
-      console.log(values);
 
+    onSubmit: (values) => {
+      // console.log(values);
       // fetch("http://59.152.62.177:8085/api/SaveEmployeeInformation", {
       //   method: "POST",
       //   headers: {
@@ -54,8 +52,6 @@ const AddUserModal = ({ openModal, handleCloseModal }) => {
       //   });
     },
   });
-
-  
 
   return (
     <Modal
@@ -106,7 +102,9 @@ const AddUserModal = ({ openModal, handleCloseModal }) => {
             label="Select"
             variant="standard"
             defaultValue=""
-            onChange={(e=>{setSelectDivison(e.target.value)})}
+            onChange={(e) => {
+              setSelectDivison(e.target.value);
+            }}
             helperText="Please select your division"
           >
             {divisions.map((option) => (
@@ -123,7 +121,9 @@ const AddUserModal = ({ openModal, handleCloseModal }) => {
             label="Select"
             variant="standard"
             defaultValue=""
-            onChange={(e=>{setSelectDistrict(e.target.value)})}
+            onChange={(e) => {
+              setSelectDistrict(e.target.value);
+            }}
             helperText="Please select your district"
           >
             {districts.map((option) => (
@@ -132,7 +132,7 @@ const AddUserModal = ({ openModal, handleCloseModal }) => {
               </MenuItem>
             ))}
           </TextField>
-        
+
           <TextField
             required
             sx={{ width: "100%", mt: 4 }}

@@ -7,11 +7,11 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import React from "react";
 import useEmployee from "../../hooks/useEmployee";
+import { Button } from "@material-ui/core";
 
 const EmployeesTab = () => {
-  const { employees } = useEmployee()
-  console.log(employees)
- 
+  const { employees } = useEmployee();
+
   return (
     <React.Fragment>
       <TableContainer component={Paper}>
@@ -23,22 +23,34 @@ const EmployeesTab = () => {
               <TableCell align="center">District</TableCell>
               <TableCell align="center">Division</TableCell>
               <TableCell align="center">Employee Type</TableCell>
+              <TableCell align="center"></TableCell>
+              <TableCell align="center"></TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {employees.readEmployeeData.map((employee) => (
-              employee.employeeType === "Employee"  &&
-              <TableRow
-                key={employee.empID}
-                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-              >
-                <TableCell align="center">{employee.firstName}</TableCell>
-                <TableCell align="center">{employee.lastName}</TableCell>
-                <TableCell align="center">{employee.district}</TableCell>
-                <TableCell align="center">{employee.disvision}</TableCell>
-                <TableCell align="center">{employee.employeeType}</TableCell>
-              </TableRow>
-            ))}
+            {employees?.readEmployeeData.map(
+              (employee) =>
+                employee.employeeType === "Employee" && (
+                  <TableRow
+                    key={employee.empID}
+                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                  >
+                    <TableCell align="center">{employee.firstName}</TableCell>
+                    <TableCell align="center">{employee.lastName}</TableCell>
+                    <TableCell align="center">{employee.district}</TableCell>
+                    <TableCell align="center">{employee.disvision}</TableCell>
+                    <TableCell align="center">
+                      {employee.employeeType}
+                    </TableCell>
+                    <TableCell align="center">
+                      <Button variant="contained">Details</Button>
+                    </TableCell>
+                    <TableCell align="center">
+                      <Button variant="contained">Update</Button>
+                    </TableCell>
+                  </TableRow>
+                )
+            )}
           </TableBody>
         </Table>
       </TableContainer>

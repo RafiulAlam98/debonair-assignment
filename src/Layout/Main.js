@@ -1,11 +1,12 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
-import NavigationDrawer from "../components/NavigationDrawer/NavigationDrawer";
+
+import Navigation from "../components/Shared/Navigation/Navigation";
 
 const Main = () => {
   return (
     <React.Fragment>
-      <NavigationDrawer />
+      <Navigation />
       <Outlet />
     </React.Fragment>
   );
