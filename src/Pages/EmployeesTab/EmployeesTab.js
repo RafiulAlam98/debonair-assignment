@@ -12,9 +12,9 @@ import { Link } from "react-router-dom";
 import UpdateUserModal from "../../components/UpdateUserModal/UpdateUserModal";
 
 const EmployeesTab = () => {
-  const [openModal, setOpenModal] = React.useState(false);
-  const handleOpenUpdateModal = () => setOpenModal(true);
-  const handleCloseUpdateModal = () => setOpenModal(false);
+  const [openUpdateModal, setOpenUpdateModal] = React.useState(false);
+  const handleOpenUpdateModal = () => setOpenUpdateModal(true);
+  const handleCloseUpdateModal = () => setOpenUpdateModal(false);
   const { employees, displayEmployees, setDisplayEmployees } = useEmployee();
   const handleSearch = (e) => {
     const searchProduct = e.target.value;
@@ -29,7 +29,7 @@ const EmployeesTab = () => {
   return (
     <React.Fragment>
       <UpdateUserModal
-        openUpdateModal={openModal}
+        openUpdateModal={openUpdateModal}
         handleCloseUpdateModal={handleCloseUpdateModal}
       />
 

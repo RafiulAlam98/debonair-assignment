@@ -34,8 +34,8 @@ const UpdateUserModal = ({ openUpdateModal, handleCloseUpdateModal }) => {
     },
 
     onSubmit: (values) => {
+      console.log(values);
       handleCloseUpdateModal();
-      // console.log(values);
       // fetch("http://59.152.62.177:8085/api/SaveEmployeeInformation", {
       //   method: "POST",
       //   headers: {

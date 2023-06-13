@@ -17,11 +17,12 @@ import { Link } from "react-router-dom";
 import UpdateUserModal from "../../components/UpdateUserModal/UpdateUserModal";
 
 const UserTab = () => {
-  const [openModal, setOpenModal] = React.useState(false);
-  const handleOpenModal = () => setOpenModal(true);
-  const handleCloseModal = () => setOpenModal(false);
-  const handleOpenUpdateModal = () => setOpenModal(true);
-  const handleCloseUpdateModal = () => setOpenModal(false);
+  const [openUserModal, setOpenUserModal] = React.useState(false);
+  const [openUpdateModal, setOpenUpdateModal] = React.useState(false);
+  const handleOpenUpdateModal = () => setOpenUpdateModal(true);
+  const handleCloseUpdateModal = () => setOpenUpdateModal(false);
+  const handleOpenUserModal = () => setOpenUserModal(true);
+  const handleCloseUserModal = () => setOpenUserModal(false);
   const { employees, displayEmployees, setDisplayEmployees } = useEmployee();
 
   const handleSearch = (e) => {
@@ -35,18 +36,21 @@ const UserTab = () => {
   };
   return (
     <React.Fragment>
-      <Button onClick={handleOpenModal} style={{ marginBottom: 10 }}>
+      <Button onClick={handleOpenUserModal} style={{ marginBottom: 10 }}>
         Add New User
       </Button>
-      <AddUserModal openModal={openModal} handleCloseModal={handleCloseModal} />
+      <AddUserModal
+        openUserModal={openUserModal}
+        handleCloseUserModal={handleCloseUserModal}
+      />
       <UpdateUserModal
-        openUpdateModal={openModal}
+        openUpdateModal={openUpdateModal}
         handleCloseUpdateModal={handleCloseUpdateModal}
       />
-      <Box sx={{ marginTop: 10 }}>
+      <Box sx={{ marginTop: 4 }}>
         <TextField
           onChange={handleSearch}
-          sx={{ width: "100%", marginTop: 10 }}
+          sx={{ width: "100%" }}
           id="outlined-basic"
           label="Search User"
           variant="outlined"

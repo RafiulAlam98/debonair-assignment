@@ -15,7 +15,7 @@ const style = {
   p: 4,
 };
 
-const AddUserModal = ({ openModal, handleCloseModal }) => {
+const AddUserModal = ({ openUserModal, handleCloseUserModal }) => {
   const [divisions] = useDivisions();
   const [selectDivision, setSelectDivison] = useState("");
   const [selectDistrict, setSelectDistrict] = useState("");
@@ -33,7 +33,8 @@ const AddUserModal = ({ openModal, handleCloseModal }) => {
     },
 
     onSubmit: (values) => {
-      handleCloseModal();
+      console.log(values);
+      handleCloseUserModal();
       // console.log(values);
       // fetch("http://59.152.62.177:8085/api/SaveEmployeeInformation", {
       //   method: "POST",
@@ -55,8 +56,8 @@ const AddUserModal = ({ openModal, handleCloseModal }) => {
 
   return (
     <Modal
-      open={openModal}
-      onClose={handleCloseModal}
+      open={openUserModal}
+      onClose={handleCloseUserModal}
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
     >
