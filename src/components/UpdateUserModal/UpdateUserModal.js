@@ -65,7 +65,7 @@ const UpdateUserModal = ({ openUpdateModal, handleCloseUpdateModal }) => {
         <form onSubmit={formik.handleSubmit}>
           <TextField
             required
-            sx={{ width: "100%" }}
+            sx={{ width: "45%", margin: 1 }}
             id="standard-basic firstName"
             label="First Name"
             variant="standard"
@@ -77,7 +77,7 @@ const UpdateUserModal = ({ openUpdateModal, handleCloseUpdateModal }) => {
           />
           <TextField
             required
-            sx={{ width: "100%", mt: 4 }}
+            sx={{ width: "45%", margin: 1 }}
             label="Last Name"
             variant="standard"
             name="lastName"
@@ -88,7 +88,7 @@ const UpdateUserModal = ({ openUpdateModal, handleCloseUpdateModal }) => {
           />
           <TextField
             required
-            sx={{ width: "100%", mt: 4 }}
+            sx={{ width: "45%", margin: 1 }}
             id="standard-basic employeeType"
             label="Employee Type"
             variant="standard"
@@ -100,17 +100,16 @@ const UpdateUserModal = ({ openUpdateModal, handleCloseUpdateModal }) => {
           />
           <TextField
             required
-            sx={{ width: "100%", mt: 4 }}
+            sx={{ width: "45%", margin: 1 }}
             id="standard-basic"
             select
-            label="Select"
+            label="Please select your division"
             variant="standard"
             defaultValue=""
             size="small"
             onChange={(e) => {
               setSelectDivison(e.target.value);
             }}
-            helperText="Please select your division"
           >
             {divisions.map((option) => (
               <MenuItem key={option.divID} value={option.divID}>
@@ -120,17 +119,16 @@ const UpdateUserModal = ({ openUpdateModal, handleCloseUpdateModal }) => {
           </TextField>
           <TextField
             required
-            sx={{ width: "100%", mt: 4 }}
+            sx={{ width: "45%", margin: 1 }}
             id="standard-basic"
             select
-            label="Select"
+            label="Please select your district"
             variant="standard"
             defaultValue=""
             size="small"
             onChange={(e) => {
               setSelectDistrict(e.target.value);
             }}
-            helperText="Please select your district"
           >
             {districts.map((option) => (
               <MenuItem key={option.districtID} value={option.districtID}>
@@ -141,7 +139,7 @@ const UpdateUserModal = ({ openUpdateModal, handleCloseUpdateModal }) => {
 
           <TextField
             required
-            sx={{ width: "100%", mt: 4 }}
+            sx={{ width: "45%", margin: 1 }}
             id="standard-basic districeID"
             label="District ID"
             variant="standard"
