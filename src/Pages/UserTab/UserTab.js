@@ -66,7 +66,9 @@ const UserTab = () => {
                       </Button>
                     </TableCell>
                     <TableCell align="center">
-                      <Button variant="contained">Update</Button>
+                      <Button onClick={handleOpenModal} variant="contained">
+                        Update
+                      </Button>
                     </TableCell>
                   </TableRow>
                 )

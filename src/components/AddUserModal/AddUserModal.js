@@ -1,7 +1,6 @@
 import { Box, Button, MenuItem, Modal, TextField } from "@mui/material";
 import { useFormik } from "formik";
 import React, { useState } from "react";
-import * as Yup from "yup";
 import useDivisions from "../../hooks/useDivisions";
 import useDistricts from "../../hooks/useDistricts";
 const style = {
@@ -34,6 +33,7 @@ const AddUserModal = ({ openModal, handleCloseModal }) => {
     },
 
     onSubmit: (values) => {
+      handleCloseModal();
       // console.log(values);
       // fetch("http://59.152.62.177:8085/api/SaveEmployeeInformation", {
       //   method: "POST",

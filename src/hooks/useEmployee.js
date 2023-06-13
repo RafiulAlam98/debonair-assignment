@@ -21,7 +21,7 @@ const useEmployee = () => {
   if (isLoading) {
     return <Loading />;
   }
-  console.log(employees?.readEmployeeData);
+  // console.log(employees?.readEmployeeData);
   return { employees, refetch, isLoading };
 };
 
