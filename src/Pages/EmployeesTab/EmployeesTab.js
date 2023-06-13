@@ -8,6 +8,7 @@ import TableRow from "@mui/material/TableRow";
 import React from "react";
 import useEmployee from "../../hooks/useEmployee";
 import { Button } from "@material-ui/core";
+import { Link } from "react-router-dom";
 
 const EmployeesTab = () => {
   const { employees } = useEmployee();
@@ -43,7 +44,14 @@ const EmployeesTab = () => {
                       {employee.employeeType}
                     </TableCell>
                     <TableCell align="center">
-                      <Button variant="contained">Details</Button>
+                      <Button variant="contained">
+                        <Link
+                          to={`/employee-details/${employee.empID}`}
+                          style={{ textDecoration: "none" }}
+                        >
+                          Details
+                        </Link>
+                      </Button>
                     </TableCell>
                     <TableCell align="center">
                       <Button variant="contained">Update</Button>

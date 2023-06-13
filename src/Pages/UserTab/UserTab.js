@@ -23,9 +23,6 @@ const UserTab = () => {
     return <Loading />;
   }
 
-  const handleDetails = (id) => {
-    console.log("empid", id);
-  };
   return (
     <React.Fragment>
       <Button onClick={handleOpenModal}>Open modal</Button>
@@ -59,12 +56,9 @@ const UserTab = () => {
                       {employee.employeeType}
                     </TableCell>
                     <TableCell align="center">
-                      <Button
-                        variant="contained"
-                        onClick={() => handleDetails(employee.empID)}
-                      >
+                      <Button variant="contained">
                         <Link
-                          to="/user-details"
+                          to={`/user-details/${employee.empID}`}
                           style={{ textDecoration: "none" }}
                         >
                           Details
