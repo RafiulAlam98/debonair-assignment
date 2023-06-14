@@ -3,6 +3,7 @@ import { useFormik } from "formik";
 import React, { useState } from "react";
 import useDivisions from "../../hooks/useDivisions";
 import useDistricts from "../../hooks/useDistricts";
+import { toast } from "react-hot-toast";
 const style = {
   position: "absolute",
   top: "50%",
@@ -15,6 +16,29 @@ const style = {
   p: 4,
 };
 
+const initialValues = {
+  firstName: "",
+  lastName: "",
+  employeeType: "",
+  districtID: "",
+};
+
+const validate = (values) => {
+  let errors = {};
+  if (!values.firstName) {
+    errors.firstName = "Required";
+  }
+  if (!values.lastName) {
+    errors.lastName = "Required";
+  }
+  if (!values.employeeType) {
+    errors.employeeType = "Required";
+  }
+  if (!values.districtID) {
+    errors.districtID = "Required";
+  }
+};
+
 const AddUserModal = ({ openUserModal, handleCloseUserModal }) => {
   const [divisions] = useDivisions();
   const [selectDivision, setSelectDivison] = useState("");
@@ -22,35 +46,34 @@ const AddUserModal = ({ openUserModal, handleCloseUserModal }) => {
   const divId = selectDivision;
   const [districts] = useDistricts(divId);
 
-  console.log("districeID", selectDistrict);
+  // console.log("districtID", selectDistrict);
 
   const formik = useFormik({
-    initialValues: {
-      firstName: "",
-      lastName: "",
-      employeeType: "",
-      districeID: selectDistrict,
-    },
+    initialValues,
+
+    validate,
 
     onSubmit: (values) => {
+      values.districtID = selectDistrict;
+
       console.log(values);
-      handleCloseUserModal();
-      // console.log(values);
-      // fetch("http://59.152.62.177:8085/api/SaveEmployeeInformation", {
-      //   method: "POST",
-      //   headers: {
-      //     "content-type": "application/json",
-      //   },
-      //   body: JSON.stringify(values),
-      // })
-      //   .then((res) => res.json())
-      //   .then((data) => {
-      //     if (data.acknowledged === true) {
-      //       console.log(data);
-      //     } else {
-      //       console.log(data);
-      //     }
-      //   });
+      fetch("http://59.152.62.177:8085/api/Employee/SaveEmployeeInformation", {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(values),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.isSuccess === true) {
+            handleCloseUserModal();
+            toast.success("user added successfully");
+          } else {
+            console.log(data);
+            toast.error(data.message);
+          }
+        });
     },
   });
 
@@ -140,10 +163,10 @@ const AddUserModal = ({ openUserModal, handleCloseUserModal }) => {
           <TextField
             required
             sx={{ width: "45%", mt: 1 }}
-            id="standard-basic districeID"
+            id="standard-basic districtID"
             label="District ID"
             variant="standard"
-            name="districeID"
+            name="districtID"
             size="small"
             onChange={formik.handleChange}
             value={selectDistrict}

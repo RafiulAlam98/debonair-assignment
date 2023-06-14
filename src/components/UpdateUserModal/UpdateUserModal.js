@@ -3,6 +3,7 @@ import { useFormik } from "formik";
 import React, { useState } from "react";
 import useDivisions from "../../hooks/useDivisions";
 import useDistricts from "../../hooks/useDistricts";
+import { toast } from "react-hot-toast";
 
 const style = {
   position: "absolute",
@@ -16,41 +17,70 @@ const style = {
   p: 4,
 };
 
-const UpdateUserModal = ({ openUpdateModal, handleCloseUpdateModal }) => {
+const initialValues = {
+  firstName: "",
+  lastName: "",
+  employeeType: "",
+  districtID: "",
+};
+
+const validate = (values) => {
+  let errors = {};
+  if (!values.firstName) {
+    errors.firstName = "Required";
+  }
+  if (!values.lastName) {
+    errors.lastName = "Required";
+  }
+  if (!values.employeeType) {
+    errors.employeeType = "Required";
+  }
+  if (!values.districtID) {
+    errors.districtID = "Required";
+  }
+};
+
+const UpdateUserModal = ({
+  openUpdateModal,
+  handleCloseUpdateModal,
+  updateId,
+}) => {
   const [divisions] = useDivisions();
   const [selectDivision, setSelectDivison] = useState("");
   const [selectDistrict, setSelectDistrict] = useState("");
   const divId = selectDivision;
   const [districts] = useDistricts(divId);
 
-  // console.log("districeID",selectDistrict)
+  console.log(updateId);
 
   const formik = useFormik({
-    initialValues: {
-      firstName: "",
-      lastName: "",
-      employeeType: "",
-      districeID: selectDistrict,
-    },
-
+    initialValues,
+    validate,
     onSubmit: (values) => {
       console.log(values);
-      handleCloseUpdateModal();
-      // fetch("http://59.152.62.177:8085/api/SaveEmployeeInformation", {
-      //   method: "POST",
-      //   headers: {
-      //     "content-type": "application/json",
-      //   },
-      //   body: JSON.stringify(values),
-      // })
-      //   .then((res) => res.json())
-      //   .then((data) => {
-      //     if (data.acknowledged === true) {
-      //       console.log(data);
-      //     } else {
-      //       console.log(data);
-      //     }
-      //   });
+      values.districtID = selectDistrict;
+
+      fetch(
+        `http://59.152.62.177:8085/api/Employee/UpdateEmployeeInformation/${updateId}`,
+        {
+          method: "PUT",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(values),
+        }
+      )
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+          if (data.isSuccess === true) {
+            handleCloseUpdateModal();
+            toast.success("user updated successfully");
+          } else {
+            console.log(data);
+            toast.error(data.title);
+          }
+        });
     },
   });
 
@@ -140,16 +170,16 @@ const UpdateUserModal = ({ openUpdateModal, handleCloseUpdateModal }) => {
           <TextField
             required
             sx={{ width: "45%", margin: 1 }}
-            id="standard-basic districeID"
+            id="standard-basic districtID"
             label="District ID"
             variant="standard"
-            name="districeID"
+            name="districtID"
             size="small"
             onChange={formik.handleChange}
             value={selectDistrict}
           />
 
-          <Button sx={{ marginTop: 4 }} type="submit" variant="contained">
+          <Button sx={{ marginTop: 2 }} type="submit" variant="contained">
             Submit
           </Button>
         </form>

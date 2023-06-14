@@ -10,7 +10,7 @@ import {
   TableRow,
   TextField,
 } from "@material-ui/core";
-import React from "react";
+import React, { useState } from "react";
 import AddUserModal from "../../components/AddUserModal/AddUserModal";
 import useEmployee from "../../hooks/useEmployee";
 import { Link } from "react-router-dom";
@@ -19,7 +19,11 @@ import UpdateUserModal from "../../components/UpdateUserModal/UpdateUserModal";
 const UserTab = () => {
   const [openUserModal, setOpenUserModal] = React.useState(false);
   const [openUpdateModal, setOpenUpdateModal] = React.useState(false);
-  const handleOpenUpdateModal = () => setOpenUpdateModal(true);
+  const [updateId, setUpdateId] = useState("");
+  const handleOpenUpdateModal = (id) => {
+    setUpdateId(id);
+    setOpenUpdateModal(true);
+  };
   const handleCloseUpdateModal = () => setOpenUpdateModal(false);
   const handleOpenUserModal = () => setOpenUserModal(true);
   const handleCloseUserModal = () => setOpenUserModal(false);
@@ -28,11 +32,11 @@ const UserTab = () => {
   const handleSearch = (e) => {
     const searchProduct = e.target.value;
 
-    const matchProduct = employees?.filter((emp) =>
+    const matchEmployee = employees?.filter((emp) =>
       emp.firstName.toLowerCase().includes(searchProduct.toLowerCase())
     );
-    console.log(matchProduct);
-    setDisplayEmployees(matchProduct);
+    // console.log(matchEmployee);
+    setDisplayEmployees(matchEmployee);
   };
   return (
     <React.Fragment>
@@ -46,6 +50,7 @@ const UserTab = () => {
       <UpdateUserModal
         openUpdateModal={openUpdateModal}
         handleCloseUpdateModal={handleCloseUpdateModal}
+        updateId={updateId}
       />
       <Box sx={{ marginTop: 4 }}>
         <TextField
@@ -97,7 +102,7 @@ const UserTab = () => {
                     </TableCell>
                     <TableCell align="center">
                       <Button
-                        onClick={handleOpenUpdateModal}
+                        onClick={() => handleOpenUpdateModal(employee.empID)}
                         variant="contained"
                       >
                         Update

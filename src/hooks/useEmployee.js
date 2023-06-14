@@ -8,7 +8,7 @@ const useEmployee = () => {
     fetch("http://59.152.62.177:8085/api/Employee/EmployeeData")
       .then((res) => res.json())
       .then((data) => {
-        console.log(data.readEmployeeData);
+        // console.log(data.readEmployeeData);
         setEmployees(data.readEmployeeData);
         setDisplayEmployees(data.readEmployeeData);
       });

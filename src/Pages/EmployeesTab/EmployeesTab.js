@@ -5,7 +5,7 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import React from "react";
+import React, { useState } from "react";
 import useEmployee from "../../hooks/useEmployee";
 import { Box, Button, TextField } from "@material-ui/core";
 import { Link } from "react-router-dom";
@@ -13,17 +13,21 @@ import UpdateUserModal from "../../components/UpdateUserModal/UpdateUserModal";
 
 const EmployeesTab = () => {
   const [openUpdateModal, setOpenUpdateModal] = React.useState(false);
-  const handleOpenUpdateModal = () => setOpenUpdateModal(true);
+  const [updateId, setUpdateId] = useState("");
+  const handleOpenUpdateModal = (id) => {
+    setUpdateId(id);
+    setOpenUpdateModal(true);
+  };
   const handleCloseUpdateModal = () => setOpenUpdateModal(false);
   const { employees, displayEmployees, setDisplayEmployees } = useEmployee();
   const handleSearch = (e) => {
     const searchProduct = e.target.value;
 
-    const matchProduct = employees?.filter((emp) =>
+    const matchEmployee = employees?.filter((emp) =>
       emp.firstName.toLowerCase().includes(searchProduct.toLowerCase())
     );
-    console.log(matchProduct);
-    setDisplayEmployees(matchProduct);
+    console.log(matchEmployee);
+    setDisplayEmployees(matchEmployee);
   };
 
   return (
@@ -31,6 +35,7 @@ const EmployeesTab = () => {
       <UpdateUserModal
         openUpdateModal={openUpdateModal}
         handleCloseUpdateModal={handleCloseUpdateModal}
+        updateId={updateId}
       />
 
       <Box sx={{ marginTop: 4 }}>
@@ -83,7 +88,7 @@ const EmployeesTab = () => {
                     </TableCell>
                     <TableCell align="center">
                       <Button
-                        onClick={handleOpenUpdateModal}
+                        onClick={() => handleOpenUpdateModal(employee.empID)}
                         variant="contained"
                       >
                         Update
