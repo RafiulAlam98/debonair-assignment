@@ -40,9 +40,7 @@ const UserTab = () => {
   };
   return (
     <React.Fragment>
-      <Button onClick={handleOpenUserModal} style={{ marginBottom: 10 }}>
-        Add New User
-      </Button>
+      <Button onClick={handleOpenUserModal}>Add New User</Button>
       <AddUserModal
         openUserModal={openUserModal}
         handleCloseUserModal={handleCloseUserModal}
@@ -52,10 +50,10 @@ const UserTab = () => {
         handleCloseUpdateModal={handleCloseUpdateModal}
         updateId={updateId}
       />
-      <Box sx={{ marginTop: 4 }}>
+      <Box>
         <TextField
           onChange={handleSearch}
-          sx={{ width: "100%" }}
+          style={{ marginTop: 24, width: "50%", marginBottom: 24 }}
           id="outlined-basic"
           label="Search User"
           variant="outlined"

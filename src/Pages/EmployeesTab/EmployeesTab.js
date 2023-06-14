@@ -38,10 +38,10 @@ const EmployeesTab = () => {
         updateId={updateId}
       />
 
-      <Box sx={{ marginTop: 4 }}>
+      <Box>
         <TextField
           onChange={handleSearch}
-          sx={{ width: "100%" }}
+          style={{ marginTop: 24, width: "50%", marginBottom: 24 }}
           id="outlined-basic"
           label="Search User"
           variant="outlined"

@@ -92,6 +92,7 @@ const UpdateUserModal = ({
       aria-describedby="modal-modal-description"
     >
       <Box sx={style}>
+        <h2>Update User</h2>
         <form onSubmit={formik.handleSubmit}>
           <TextField
             required

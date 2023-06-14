@@ -56,24 +56,31 @@ const AddUserModal = ({ openUserModal, handleCloseUserModal }) => {
     onSubmit: (values) => {
       values.districtID = selectDistrict;
 
-      console.log(values);
-      fetch("http://59.152.62.177:8085/api/Employee/SaveEmployeeInformation", {
-        method: "POST",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify(values),
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          if (data.isSuccess === true) {
-            handleCloseUserModal();
-            toast.success("user added successfully");
-          } else {
-            console.log(data);
-            toast.error(data.message);
+      // console.log(values);
+      try {
+        fetch(
+          "http://59.152.62.177:8085/api/Employee/SaveEmployeeInformation",
+          {
+            method: "POST",
+            headers: {
+              "content-type": "application/json",
+            },
+            body: JSON.stringify(values),
           }
-        });
+        )
+          .then((res) => res.json())
+          .then((data) => {
+            if (data.isSuccess === true) {
+              handleCloseUserModal();
+              toast.success("user added successfully");
+            } else {
+              // console.log(data);
+              toast.error(data.message);
+            }
+          });
+      } catch (error) {
+        toast.error(error);
+      }
     },
   });
 
