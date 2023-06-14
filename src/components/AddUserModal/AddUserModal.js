@@ -92,6 +92,7 @@ const AddUserModal = ({ openUserModal, handleCloseUserModal }) => {
       aria-describedby="modal-modal-description"
     >
       <Box sx={style}>
+        <h2>Add New User</h2>
         <form onSubmit={formik.handleSubmit}>
           <TextField
             required
